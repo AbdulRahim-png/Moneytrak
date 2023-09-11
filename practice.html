@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Handling and Form Input Validation</title>
+</head>
+<body>
+    <button id="myButton">Click Me</button>
+    <p id="myParagraph">Mouse over or out of me!</p>
+
+    <form id="myForm">
+        <label for="inputField">Enter a value:</label>
+        <input type="text" id="inputField" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Click event
+        const button = document.getElementById('myButton');
+        button.addEventListener('click', function() {
+            console.log('Button clicked!');
+        });
+
+        // Mouseover event
+        const paragraph = document.getElementById('myParagraph');
+        paragraph.addEventListener('mouseover', function() {
+            console.log('Mouse over the paragraph!');
+        });
+
+        // Mouseout event
+        paragraph.addEventListener('mouseout', function() {
+            console.log('Mouse out of the paragraph!');
+        });
+
+        // Form submission event
+        const form = document.getElementById('myForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from actually submitting
+
+            const inputField = document.getElementById('inputField');
+            const inputValue = inputField.value.trim(); // Trim removes leading and trailing white spaces
+
+            if (inputValue === '') {
+                console.log('Please enter a value.');
+            } else {
+                console.log('Form submitted with value: ' + inputValue);
+            }
+        });
+    </script>
+</body>
+</html>
