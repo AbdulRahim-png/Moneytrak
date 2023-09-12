@@ -18,11 +18,14 @@ var li = document.getElementsByTagName('li')
 //var items =document.getElementsByClassName('list-group-item');
 console.log(li);
 console.log(li[1]);
-li[1].textContent = "Hello 2"
+li[1].textContent = "item 2"
 li[3].computedStyleMap.backgroundColor = 'yellow';
 li[1].style.fontWeight = 'bold'
-li[1].style.backgroundColor = 'yellow'
+li[1].style.backgroundColor = 'green'
 li[2].style.backgroundColor = 'green'
 li[2].style.fontWeight = 'bold'
 li[0].style.fontWeight = 'bold'
 li[3].style.fontWeight = 'bold'
+var thirditem = document.querySelector
+('.list-group-item:nth-child(3)');
+thirditem.style.color = 'green';
