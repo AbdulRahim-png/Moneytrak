@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Event Handling and Form Input Validation</title>
+    <title>User Details Form</title>
 </head>
 <body>
-    <button id="myButton">Click Me</button>
-    <p id="myParagraph">Mouse over or out of me!</p>
+    <h1>User Details Form</h1>
 
-    <form id="myForm">
-        <label for="inputField">Enter a value:</label>
-        <input type="text" id="inputField" required>
-        <button type="submit">Submit</button>
+    <form id="userDetailsForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required><br><br>
+
+        <input type="submit" value="Submit">
     </form>
 
     <script>
-        // Click event
-        const button = document.getElementById('myButton');
-        button.addEventListener('click', function() {
-            console.log('Button clicked!');
-        });
+        document.getElementById('userDetailsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        // Mouseover event
-        const paragraph = document.getElementById('myParagraph');
-        paragraph.addEventListener('mouseover', function() {
-            console.log('Mouse over the paragraph!');
-        });
+            // Get user input
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var age = document.getElementById('age').value;
 
-        // Mouseout event
-        paragraph.addEventListener('mouseout', function() {
-            console.log('Mouse out of the paragraph!');
-        });
+            // Create an object to hold the user details
+            var userDetails = {
+                name: name,
+                email: email,
+                age: age
+            };
 
-        // Form submission event
-        const form = document.getElementById('myForm');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from actually submitting
+            // Convert the object to a JSON string
+            var userDetailsJSON = JSON.stringify(userDetails);
 
-            const inputField = document.getElementById('inputField');
-            const inputValue = inputField.value.trim(); // Trim removes leading and trailing white spaces
+            // Store the JSON string in local storage
+            localStorage.setItem('userDetails', userDetailsJSON);
 
-            if (inputValue === '') {
-                console.log('Please enter a value.');
-            } else {
-                console.log('Form submitted with value: ' + inputValue);
-            }
+            // Provide feedback to the user
+            alert('User details submitted successfully!');
         });
     </script>
 </body>
