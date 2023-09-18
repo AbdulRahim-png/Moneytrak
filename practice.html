@@ -67,6 +67,23 @@
             displayUserList();
         }
 
+        function editUser(index) {
+            var userDetailsList = JSON.parse(localStorage.getItem('userDetailsList')) || [];
+            var user = userDetailsList[index];
+
+            // Populate the form with the user details for editing
+            document.getElementById('name').value = user.name;
+            document.getElementById('email').value = user.email;
+            document.getElementById('age').value = user.age;
+
+            // Delete the user from the list since we're editing it
+            userDetailsList.splice(index, 1);
+            localStorage.setItem('userDetailsList', JSON.stringify(userDetailsList));
+
+            // Refresh the user list
+            displayUserList();
+        }
+
         function displayUserList() {
             var userListDiv = document.getElementById('userList');
             userListDiv.innerHTML = '';
@@ -79,6 +96,7 @@
                     <p><strong>Name:</strong> ${user.name}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
                     <p><strong>Age:</strong> ${user.age}</p>
+                    <button onclick="editUser(${index})">Edit</button>
                     <button onclick="deleteUser(${index})">Delete</button>
                     <hr>
                 `;
