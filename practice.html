@@ -19,6 +19,10 @@
         <input type="submit" value="Submit">
     </form>
 
+    <div id="userList">
+        <!-- User details will be displayed here -->
+    </div>
+
     <script>
         document.getElementById('userDetailsForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -46,7 +50,44 @@
 
             // Provide feedback to the user
             alert('User details submitted successfully!');
+
+            // Clear form inputs
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('age').value = '';
+
+            // Refresh the user list
+            displayUserList();
         });
+
+        function deleteUser(index) {
+            var userDetailsList = JSON.parse(localStorage.getItem('userDetailsList')) || [];
+            userDetailsList.splice(index, 1);
+            localStorage.setItem('userDetailsList', JSON.stringify(userDetailsList));
+            displayUserList();
+        }
+
+        function displayUserList() {
+            var userListDiv = document.getElementById('userList');
+            userListDiv.innerHTML = '';
+
+            var userDetailsList = JSON.parse(localStorage.getItem('userDetailsList')) || [];
+
+            userDetailsList.forEach(function(user, index) {
+                var userDiv = document.createElement('div');
+                userDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>Age:</strong> ${user.age}</p>
+                    <button onclick="deleteUser(${index})">Delete</button>
+                    <hr>
+                `;
+                userListDiv.appendChild(userDiv);
+            });
+        }
+
+        // Display user list on page load
+        displayUserList();
     </script>
 </body>
 </html>
